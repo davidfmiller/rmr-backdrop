@@ -1,4 +1,6 @@
-/* */
+/*jslint browser:true, indent:2,white:true,nomen:false,plusplus:false */
+/*global YUI, window */
+
 
 YUI.add('backdrop', function(Y) {
 
@@ -10,15 +12,17 @@ YUI.add('backdrop', function(Y) {
 
     Y.Backdrop = Y.extend(Backdrop, Y.Base,
     {
+
       toString : function() {
-        return 'Backdrop';
+        return '[Backdrop]';
       },
 
       initializer : function(config) {
 
         var url = config.url,
+            id = config.hasOwnProperty('id') ? config.id : 'backdrop',
             img = new Image(),
-            n = Y.Node.create('<div id="backdrop"></div>'),
+            n = Y.Node.create('<div id="' + id + '"></div>'),
             resize = function(node) {
               var body = Y.one('body'),
                   region = null;
@@ -35,10 +39,10 @@ YUI.add('backdrop', function(Y) {
           resize(n);
           n.transition({
             'opacity' : 1,
-            'duration' : 0.5
+            'duration' : config.hasOwnProperty('duration') ? parseFloat(config.duration, 10) : 0.5
           }, function() { });
     
-          Y.on('windowresize', function(e) { resize(n); });
+          Y.on('windowresize', function() { resize(n); });
         };
         img.src = url;
 

@@ -26,6 +26,7 @@ div {
   z-index: 1;
 }
 
+#buh,
 #backdrop {
   left: 0;
   margin: 0;
@@ -35,6 +36,7 @@ div {
   top: 0;
   z-index: 0;
 }
+
 
 </style>
 </head>
@@ -59,7 +61,11 @@ div {
     if (Y.UA.mobile) { return false; }
 
     Y.on('domready', function(e) {
-      new Y.Backdrop({'url' : 'http://farm7.staticflickr.com/6090/6075086959_a2efe9e001_o.jpg' });
+      new Y.Backdrop({
+        'url' : 'http://farm7.staticflickr.com/6090/6075086959_a2efe9e001_o.jpg',
+        'id' : 'backdrop',
+        'duration' : 1
+      });
     });
 
   });
