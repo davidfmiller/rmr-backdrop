@@ -22,6 +22,7 @@ YUI.add('backdrop', function(Y) {
         var url = config.url,
             id = config.hasOwnProperty('id') ? config.id : 'backdrop',
             img = new Image(),
+            $ = this,
             n = Y.Node.create('<div id="' + id + '"></div>'),
             resize = function(node) {
               var body = Y.one('body'),
@@ -40,7 +41,7 @@ YUI.add('backdrop', function(Y) {
           n.transition({
             'opacity' : 1,
             'duration' : config.hasOwnProperty('duration') ? parseFloat(config.duration, 10) : 0.5
-          }, function() { });
+          }, function() { $.fire('load'); });
     
           Y.on('windowresize', function() { resize(n); });
         };
