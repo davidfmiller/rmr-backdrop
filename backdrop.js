@@ -39,7 +39,6 @@ YUI.add('backdrop', function(Y) {
         img.onload = function() {
 
           Y.one('body').append(config.n);
-//          Y.one('body').append(Y.Node.create('<!-- made with backdrop (http://github.com/davidfmiller/backdrop) -->'));
 
           config.n.setStyle('backgroundImage', 'url(' + this.src + ')');
           resize(config.n);
