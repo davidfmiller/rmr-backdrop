@@ -24,8 +24,6 @@ YUI.add('backdrop', function(Y) {
         var url = config.url,
             id = config.hasOwnProperty('id') ? config.id : 'backdrop',
             img = new Image(),
-            $ = this,
-            n = Y.Node.create('<div id="' + id + '"></div>'),
             resize = function(node) {
               var body = Y.one('body'),
                   region = null;
@@ -35,17 +33,22 @@ YUI.add('backdrop', function(Y) {
               node.setStyles({'width': region.width + 'px', 'height': region.height + 'px'});
             };
 
+        config.$ = this,
+        config.n = Y.Node.create('<div id="' + id + '"></div>'),
+
         img.onload = function() {
 
-          Y.one('body').append(n);
-          n.setStyle('backgroundImage', 'url(' + this.src + ')');
-          resize(n);
-          n.transition({
+          Y.one('body').append(config.n);
+//          Y.one('body').append(Y.Node.create('<!-- made with backdrop (http://github.com/davidfmiller/backdrop) -->'));
+
+          config.n.setStyle('backgroundImage', 'url(' + this.src + ')');
+          resize(config.n);
+          config.n.transition({
             'opacity' : 1,
             'duration' : config.hasOwnProperty('duration') ? parseFloat(config.duration, 10) : 0.5
-          }, function() { $.fire('load'); });
+          }, function() { config.$.fire('load'); });
 
-          Y.on('windowresize', function() { resize(n); });
+          Y.on('windowresize', function() { resize(config.n); });
         };
         img.src = url;
 
