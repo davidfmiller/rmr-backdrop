@@ -16,42 +16,67 @@ YUI.add('backdrop', function(Y) {
       /* 
        *
        * @param config (object)
-       *  'node' (selector) - the element that will become the parent of the 
+       *  'url' (string) - the path to the background image
        *  'id' (string, optional) - 
+       *  'duration' (float, optional) - seconds
        */
       initializer : function(config) {
 
-        var url = config.url,
-            id = config.hasOwnProperty('id') ? config.id : 'backdrop',
-            img = new Image(),
-            resize = function(node) {
-              var body = Y.one('body'),
+        this.set('url', config.url);
+        this.set('id', config.hasOwnProperty('id') ? config.id : 'backdrop');
+        this.set('duration', config.hasOwnProperty('duration') ? parseFloat(config.duration, 10) : 1);
+
+        var img = new Image(),
+/*            resize = function(node) {
+              var body = Y.one(document.body),
                   region = null;
 
               body.setStyle('minHeight', body.get('winHeight') + 'px');
               region = body.get('region');
               node.setStyles({'width': region.width + 'px', 'height': region.height + 'px'});
-            };
+            },*/
+            o = {};
 
-        config.$ = this,
-        config.n = Y.Node.create('<div id="' + id + '"></div>'),
+        o.$ = this;
+        o.node = Y.Node.create('<div id="' + this.get('id') + '"></div>');
 
         img.onload = function() {
-
-          Y.one('body').append(config.n);
-
-          config.n.setStyle('backgroundImage', 'url(' + this.src + ')');
-          resize(config.n);
-          config.n.transition({
+          Y.one('body').append(o.node);
+          o.node.setStyle('backgroundImage', 'url(' + this.src + ')');
+          o.$.resize();
+          o.node.transition({
             'opacity' : 1,
-            'duration' : config.hasOwnProperty('duration') ? parseFloat(config.duration, 10) : 0.5
-          }, function() { config.$.fire('load'); });
+            'duration' : o.$.get('duration')
+          }, function() { o.$.fire('drop'); });
 
-          Y.on('windowresize', function() { resize(config.n); });
+          Y.on('windowresize', function() { o.$.resize(); });
         };
-        img.src = url;
+        img.src = this.get('url');
 
+        return this;
       },
+
+      resize : function() {
+        var body = Y.one(document.body),
+            region = null;
+
+        body.setStyle('minHeight', body.get('winHeight') + 'px');
+        region = body.get('region');
+        Y.one('#' + this.get('id')).setStyles({'width': region.width + 'px', 'height': region.height + 'px'});
+      },
+
+      /* 
+       *
+       *
+      remove : function() {
+
+        var $ = this;
+        Y.one('#' + this.get('id')).transition({
+          'opacity' : 0,
+          'duration' : this.get('duration')
+        }, function(e) { this.remove(); $.fire('remove'); });
+      },
+       */
 
       /*
        *
@@ -62,7 +87,20 @@ YUI.add('backdrop', function(Y) {
       },
 
       'NAME' : 'backdrop',
-      'ATTRS' : { }
+      'ATTRS' : {
+        url : {
+          value : null,
+          writeOnce : true
+        },
+        id : {
+          value : null,
+          writeOnce : true,
+        },
+        duration : {
+          value : null,
+          writeOnce : true
+        }
+      }
     });
 
   }, '3.3.1', { requires : ['node', 'base', 'event', 'event-resize', 'transition' ] });
