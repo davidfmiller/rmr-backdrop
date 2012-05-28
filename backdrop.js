@@ -26,16 +26,7 @@ YUI.add('backdrop', function(Y) {
         this.set('id', config.hasOwnProperty('id') ? config.id : 'backdrop');
         this.set('duration', config.hasOwnProperty('duration') ? parseFloat(config.duration, 10) : 1);
 
-        var img = new Image(),
-/*            resize = function(node) {
-              var body = Y.one(document.body),
-                  region = null;
-
-              body.setStyle('minHeight', body.get('winHeight') + 'px');
-              region = body.get('region');
-              node.setStyles({'width': region.width + 'px', 'height': region.height + 'px'});
-            },*/
-            o = {};
+        var img = new Image(), o = {};
 
         o.$ = this;
         o.node = Y.Node.create('<div id="' + this.get('id') + '"></div>');
@@ -56,6 +47,10 @@ YUI.add('backdrop', function(Y) {
         return this;
       },
 
+      /*
+       *
+       * Update the size of the backdrop to match the window size (will be attached to window resize event)
+       */
       resize : function() {
         var body = Y.one(document.body),
             region = null;
@@ -63,6 +58,8 @@ YUI.add('backdrop', function(Y) {
         body.setStyle('minHeight', body.get('winHeight') + 'px');
         region = body.get('region');
         Y.one('#' + this.get('id')).setStyles({'width': region.width + 'px', 'height': region.height + 'px'});
+
+        return this;
       },
 
       /* 
