@@ -69,6 +69,7 @@ pre {
   position: absolute;
   top: 0;
   z-index: 0;
+  background-size: cover;
 }
 
 </style>
@@ -104,7 +105,7 @@ pre {
   <pre>
 new Y.Backdrop({
   url : 'http://davidfmiller.github.com/assets/img/backdrop.jpg',
-  id : 'backdrop'
+  id : 'backdrop',
   duration : 1,
 }).on('drop', function(e) { Y.log('dropped'); });</pre>
 
