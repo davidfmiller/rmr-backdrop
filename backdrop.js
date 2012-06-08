@@ -17,7 +17,7 @@ YUI.add('backdrop', function(Y) {
       Backdrop.superclass.constructor.apply(this, arguments);
 
       this.set('url', config.url);
-      this.set('id', config.hasOwnProperty('id') ? config.id : 'backdrop');
+      this.set('id', config.hasOwnProperty('id') ? config.id : null);
       this.set('duration', config.hasOwnProperty('duration') ? config.duration : null);
 
       if (! this.get('url')) { return null; }
@@ -50,6 +50,7 @@ YUI.add('backdrop', function(Y) {
       },
       id : {
         value : null,
+        setter : function(id) { return id ? id : 'backdrop'; },
         writeOnce : true,
       },
       duration : {
