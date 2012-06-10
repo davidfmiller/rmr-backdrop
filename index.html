@@ -97,7 +97,6 @@ pre {
     <dd>fired when the image is loaded and introduction is complete</dd>
   </dl>
 
-
   <p>An example implementation follows:</p>
 
   <pre>
@@ -106,6 +105,9 @@ new Y.Backdrop({
   id : 'backdrop',
   duration : 1,
 }).on('drop', function(e) { Y.log('dropped'); });</pre>
+
+  <button class="backdrop">Backdrop</button>
+  <button class="kaos">Kaos</button>
 
 </div>
 
@@ -125,11 +127,23 @@ new Y.Backdrop({
 
     Y.use('backdrop', function(Y) {
 
-      new Y.Backdrop({
-        'url' : 'http://davidfmiller.github.com/assets/img/backdrop.jpg',
-        'id' : 'backdrop',
-        'duration' : 1
-      }).on('drop', function(e) { Y.log('dropped'); });
+      var dropper = new Y.Backdrop({
+            'id' : 'backdrop',
+            'duration' : 1
+          });
+      dropper.on('drop', function(e) { Y.log('dropped'); });
+  
+      var drop = function() {
+        Y.log('drop');
+        dropper.drop('http://davidfmiller.github.com/assets/img/backdrop.jpg');
+      }, kaos = function() {
+          Y.log('kaos');
+          dropper.drop('http://davidfmiller.github.com/assets/img/kaos.jpg');
+      }
+
+      drop();
+      Y.one('button.backdrop').on('click', function(e) { drop(); } );
+      Y.one('button.kaos').on('click', function(e) { kaos(); } );
     });
   });
 </script>
