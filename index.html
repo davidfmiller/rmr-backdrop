@@ -131,7 +131,7 @@ new Y.Backdrop({
             'id' : 'backdrop',
             'duration' : 1
           });
-      dropper.on('drop', function(e) { Y.log('dropped'); });
+      dropper.on('drop', function(e) { Y.log('dropped'); Y.log(e); });
   
       var drop = function() {
         Y.log('drop');
