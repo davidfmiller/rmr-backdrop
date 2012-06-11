@@ -138,7 +138,7 @@ new Y.Backdrop({
         dropper.drop('http://davidfmiller.github.com/assets/img/backdrop.jpg');
       }, kaos = function() {
           Y.log('kaos');
-          dropper.drop('http://davidfmiller.github.com/assets/img/kaos.jpg');
+          dropper.drop({'url' : 'http://davidfmiller.github.com/assets/img/kaos.jpg', 'duration' : 0.2 });
       }
 
       drop();
