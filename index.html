@@ -91,12 +91,14 @@ pre {
   </dl>
 
   <p>
-    One custom event is supported:
+    Two custom events are fired:
   </p>
 
   <dl>
-    <dt><code>drop</code></dt>
-    <dd>fired when the image is loaded and introduction is complete</dd>
+    <dt><code>start</code></dt>
+    <dd>fired when the image is loaded and the transition is about to begin</dd>
+    <dt><code>end</code></dt>
+    <dd>fired when the transition is complete</dd>
   </dl>
 
   <p>An example implementation follows:</p>
@@ -106,7 +108,7 @@ new Y.Backdrop({
   url : 'http://davidfmiller.github.com/assets/img/backdrop.jpg',
   id : 'backdrop',
   duration : 1,
-}).on('drop', function(e) { Y.log('dropped'); });</pre>
+}).on('end', function(e) { Y.log('dropped'); });</pre>
 
   <button class="backdrop">Backdrop</button>
   <button class="kaos">Kaos</button>
