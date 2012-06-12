@@ -86,6 +86,8 @@ pre {
     <dd>the id to apply the element ; defaults to "backdrop"</dd>
     <dt><code>duration</code> (optional)</dt>
     <dd>the length of time (in seconds) taken to introduce the backdrop; defaults to 1 second</dd>
+    <dt><code>styles</code> (optional)</dt>
+    <dd>object containing the background property names (ex: <code>position</code>, <code>repeat</code>, <code>size</code>) and the respective values that should be applied to the backdrop</dd>
   </dl>
 
   <p>
@@ -129,7 +131,7 @@ new Y.Backdrop({
 
       var dropper = new Y.Backdrop({
             'id' : 'backdrop',
-            'duration' : 1
+            'duration' : 0.5
           });
       dropper.on('drop', function(e) { Y.log('dropped'); Y.log(e); });
   
@@ -137,8 +139,8 @@ new Y.Backdrop({
         Y.log('drop');
         dropper.drop('http://davidfmiller.github.com/assets/img/backdrop.jpg');
       }, kaos = function() {
-          Y.log('kaos');
-          dropper.drop({'url' : 'http://davidfmiller.github.com/assets/img/kaos.jpg', 'duration' : 0.2 });
+        Y.log('kaos');
+        dropper.drop({'url' : 'http://davidfmiller.github.com/assets/img/kaos.jpg', 'styles' : { 'position' : 'right bottom' } });
       }
 
       drop();
