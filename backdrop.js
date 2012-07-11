@@ -2,7 +2,7 @@
 /*global YUI, window */
 
 /**
- @module Backdrop 
+ @module backdrop 
  */
 YUI.add('backdrop', function(Y) {
 
@@ -11,7 +11,7 @@ YUI.add('backdrop', function(Y) {
     /**
      @class Backdrop
      @constructor
-     @param config (object)
+     @param config {Object}
        'url' (string) - the path to the background image
        'id' (string, optional) - 
        'duration' (float, optional) - seconds
@@ -51,8 +51,9 @@ YUI.add('backdrop', function(Y) {
 
     Y.Backdrop = Y.extend(Backdrop, Y.Base,
     {
-      /**
-       @method destructor
+
+      /*
+       * Clean up
        */
       destructor : function() {
         this.set('id', null);
@@ -72,7 +73,7 @@ YUI.add('backdrop', function(Y) {
       /**
        @method drop
        @chainable
-       @param config
+       @param config {Object}
        */
       drop : function(config) {
 
@@ -99,7 +100,6 @@ YUI.add('backdrop', function(Y) {
           s.image = 'url(' + this.src + ')';
           o.$._applyStyles(o.node, s);
 
-          //o.node.setStyle('backgroundImage', 'url(' + this.src + ')');
           o.$.resize();
           o.node.transition({
             'opacity' : 1,
@@ -147,7 +147,7 @@ YUI.add('backdrop', function(Y) {
       /**
        Return a string representation of the object
        @method toString
-       @return string
+       @return {String}
        */
       toString : function() {
         return '[Backdrop]';
