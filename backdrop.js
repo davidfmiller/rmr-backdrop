@@ -42,7 +42,7 @@ YUI.add('backdrop', function(Y) {
       },
 
       /**
-      The attribute applied to the backdrop <div> 
+      The id attribute applied to the backdrop <div> 
       @property id
       @default 'backdrop'
       @type {String}
@@ -52,6 +52,13 @@ YUI.add('backdrop', function(Y) {
         setter : function(id) { return id || 'backdrop'; },
         writeOnce : true
       },
+
+      /**
+      The CSS background styles applied to the <div> to allow background positioning, repeating, etc.
+      @property styles
+      @default null
+      @type {Object}
+      */
       styles : {
         value : null
       },
