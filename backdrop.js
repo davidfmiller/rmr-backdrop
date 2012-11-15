@@ -31,9 +31,22 @@ YUI.add('backdrop', function(Y) {
     DEFAULT_STYLES = { 'color' : 'transparent', 'position' : 'top left', 'repeat' : 'no-repeat', 'attachment' : 'fixed', 'size' : 'auto' };
 
     Backdrop.ATTRS = {
+
+      /**
+      The path to the background image 
+      @property url
+      @type {String}
+      */
       url : {
         value : null
       },
+
+      /**
+      The attribute applied to the backdrop <div> 
+      @property id
+      @default 'backdrop'
+      @type {String}
+      */
       id : {
         value : null,
         setter : function(id) { return id || 'backdrop'; },
@@ -42,6 +55,13 @@ YUI.add('backdrop', function(Y) {
       styles : {
         value : null
       },
+
+      /**
+      The length of time (in seconds) over which the backdrop's transition will occur
+      @property duration
+      @default 1
+      @type {Number}
+      */
       duration : {
         value : 1,
         setter : function(i) { return (i ? parseFloat(i, 10) : 1); }
