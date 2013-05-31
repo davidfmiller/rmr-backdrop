@@ -1,5 +1,5 @@
-/*jslint browser:true, indent:2,white:true,nomen:false,plusplus:false */
-/*global YUI, window */
+/* jshint undef: true,strict:true,trailing:true */
+/* global YUI,document,window,Image */
 
 /**
  @module backdrop 
