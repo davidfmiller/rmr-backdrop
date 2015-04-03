@@ -2,16 +2,16 @@ A [YUI 3](http://yuilibrary.com) module for smooth background image loading used
 
 Events:
 
-- start: invoked when a backdrop is about to be loaded
-- end: invoked when a backdrop has been downloaded & applied to the page
+- start: fired when a backdrop is about to be loaded
+- end: fired when a backdrop has been downloaded & applied to the page
+
+Example usage:
 
 ```
 var dropper = new Y.Backdrop({
   'id' : 'backdrop',
   'duration' : 0.5
 });
-
-...
 
 dropper.on('start', function(e) {
   console.log('Backdrop loading: ' + e.details[0]); // src of backdrop image
@@ -21,9 +21,10 @@ dropper.on('end', function(e) {
   console.log('Backdrop applied: ' + e.details[0]); // src of backdrop image
 });
 
-... 
-
-dropper.drop({ 'url' : '', 'styles' : { 'position' : 'left bottom', 'size' : 'cover'} });
+dropper.drop({
+  'url' : 'http://davidfmiller.github.io/assets/img/backdrop/koru.jpg',
+  'styles' : { 'position' : 'left bottom', 'size' : 'cover'}
+});
 
 ```
 
