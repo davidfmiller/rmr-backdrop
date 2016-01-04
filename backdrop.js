@@ -7,6 +7,7 @@
   'use strict';
 
   var
+  RESIZE_LISTENED = false,
   DEFAULT_STYLES = { 'color' : 'transparent', 'position' : 'top left', 'repeat' : 'no-repeat', 'attachment' : 'fixed', 'size' : 'cover' },
 
     /*
@@ -158,9 +159,12 @@
 
       var interval = window.setInterval(anim, o.$.duration / 100);
 
-      window.addEventListener('resize', function(e) {
-        o.$.resize();
-      });
+      if (! RESIZE_LISTENED) {
+        this.resizeHandle = window.addEventListener('resize', function(e) {
+          o.$.resize();
+        });
+      }
+      RESIZE_LISTENED = true;
     };
 
     img.src = this.url;
