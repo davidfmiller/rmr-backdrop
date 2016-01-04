@@ -160,7 +160,7 @@
       var interval = window.setInterval(anim, o.$.duration / 100);
 
       if (! RESIZE_LISTENED) {
-        this.resizeHandle = window.addEventListener('resize', function(e) {
+        window.addEventListener('resize', function(e) {
           o.$.resize();
         });
       }
