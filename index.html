@@ -34,8 +34,6 @@ div {
   position: absolute;
   top: 0;
   z-index: 0;
-
- 
 }
 
 </style>
@@ -43,7 +41,7 @@ div {
 <body>
 
 <div id="doc">
-  <h1><i>🖼</i>Backdrop</h1>
+  <h1><i>🎨</i>Backdrop</h1>
   <p>
     Backdrop is a simple JavaScript module to preload an image and gracefully apply it as the background elment for the <code>body</code> of the page. There are three parameters in the object's constructor configuration, although only the first is required:
   </p>
@@ -71,12 +69,12 @@ div {
 
   <p>An example implementation follows:</p>
 
-  <pre>var drop = new Backdrop({
-  url : 'http://davidfmiller.github.com/assets/img/backdrop.jpg',
-  id : 'backdrop',
-  duration : 1,
-});
-drop.on('end', function(url) { window.console.log('dropped', url); });</pre>
+  <pre><span class="kd">var</span> <span class="nx">drop</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Backdrop</span><span class="p">({</span>
+  <span class="nx">url</span> <span class="o">:</span> <span class="s1">&#39;<a class="s1" href="https://raw.githubusercontent.com/davidfmiller/davidfmiller.github.com/master/assets/img/backdrop/backdrop.jpg">https://path/to/image.jpg</a>&#39;</span><span class="p">,</span>
+  <span class="nx">id</span> <span class="o">:</span> <span class="s1">&#39;backdrop&#39;</span><span class="p">,</span>
+  <span class="nx">duration</span> <span class="o">:</span> <span class="mi">1</span>
+<span class="p">});</span>
+<span class="nx">drop</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span> <span class="nb">window</span><span class="p">.</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;dropped&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span> <span class="p">});</span></pre>
 
   <button class="backdrop">Backdrop</button>
   <button class="kaos">Kaos</button>
@@ -86,6 +84,7 @@ drop.on('end', function(url) { window.console.log('dropped', url); });</pre>
 <script src="backdrop-native.js"></script>
 <script>
   var dropper = new Backdrop();
+
   dropper.on('end', function(url) { window.console.log('dropped', url); });
   dropper.on('start', function(url) { window.console.log('started', url); });
 
@@ -94,47 +93,12 @@ drop.on('end', function(url) { window.console.log('dropped', url); });</pre>
   });
 
   document.querySelector('button.kaos').addEventListener('click', function(e) {
-    dropper.drop('http://davidfmiller.github.io/assets/img/backdrop/kaos.jpg');
-  });
-</script>
-
-<!--
-<script src="http://yui.yahooapis.com/3.11.0/build/yui/yui-min.js"></script>
-<script>
-  YUI({
-    'modules' : {
-      'backdrop' : {
-        'fullpath' : 'backdrop.js',
-        'requires' : ['node', 'event', 'base', 'transition', 'event-resize']
-      }
-    }
-
-  }).use(function(Y) {
-
-    if (Y.UA.mobile) { return false; }
-
-    Y.use('backdrop', function(Y) {
-
-      var dropper = new Y.Backdrop({
-            'id' : 'backdrop',
-            'duration' : 0.5
-          });
-      dropper.on('drop', function(e) { Y.log('dropped'); Y.log(e); });
-  
-      var drop = function() {
-        Y.log('drop');
-        dropper.drop('http://davidfmiller.github.com/assets/img/backdrop.jpg');
-      }, kaos = function() {
-        Y.log('kaos');
-        dropper.drop({'url' : 'http://davidfmiller.github.com/assets/img/kaos.jpg', 'styles' : { 'position' : 'right bottom' } });
-      }
-
-      drop();
-      Y.one('button.backdrop').on('click', function(e) { drop(); } );
-      Y.one('button.kaos').on('click', function(e) { kaos(); } );
+    dropper.drop({
+      'url' : 'http://davidfmiller.github.io/assets/img/backdrop/kaos.jpg',
+      'duration' : 0.5,
+      'styles' : { 'position' : '50% top', 'color' : '#000', 'size' : 'contain' }
     });
   });
 </script>
--->
 </body>
 </html>

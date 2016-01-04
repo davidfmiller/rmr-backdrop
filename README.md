@@ -1,14 +1,16 @@
-A [YUI 3](http://yuilibrary.com) module for smooth background image loading used on [http://readmeansrun.com](http://readmeansrun.com).
+A JavaScript module for smooth background image loading used on [http://readmeansrun.com](http://readmeansrun.com).
 
 Events:
 
 - start: fired when a backdrop is about to be loaded
 - end: fired when a backdrop has been downloaded & applied to the page
 
+View more [here](https://davidfmiller.github.io/backdrop/).
+
 Example usage:
 
 ```
-var dropper = new Y.Backdrop({
+var dropper = new Backdrop({
   'id' : 'backdrop',
   'duration' : 0.5
 });

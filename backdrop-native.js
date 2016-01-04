@@ -2,7 +2,7 @@
 /* global YUI,document,window,Image */
 
 
-(function() { 
+(function() {
 
   'use strict';
 
@@ -37,15 +37,17 @@
    *
    * @param a
    * @param b
-   
+
    * @return Object
    */
   merge = function(a, b) {
-    var o = a;
+    var o = {};
+    for (var i in a) {
+      o[i] = a[i];
+    }
     for (var i in b) {
       o[i] = b[i];
     }
-
     return o;
   },
 
@@ -68,15 +70,23 @@
   };
 
 
-  window.Backdrop = function() { 
+  window.Backdrop = function(config) {
+
+    if (! config) { config = {}; }
 
     this.events = {
       'end' : function() { },
       'start' : function() { }
     };
 
-    this.id = 'backdrop';
-    this.url = 'http://davidfmiller.github.io/assets/img/backdrop/backdrop.jpg';
+    this.id = config.hasOwnProperty('id') ? config.id : 'backdrop';
+    this.url = config.hasOwnProperty('url') ? config.url : null;
+    this.duration = config.hasOwnProperty('duration') ? config.duration :1;
+    this.styles = config.hasOwnProperty('styles') ? config.styles : null;
+
+    if (this.url) {
+      this.drop(this.url);
+    }
   };
 
 
@@ -93,7 +103,16 @@
   };
 
 
-  window.Backdrop.prototype.drop = function(url) {
+  window.Backdrop.prototype.drop = function(config) {
+
+    if (typeof config === 'string') {
+      this.url = config;
+      this.styles = null;
+    } else if (config) {
+      if (config.hasOwnProperty('url')) { this.url = config.url; }
+      if (config.hasOwnProperty('duration')) { this.duration = config.duration; }
+      if (config.hasOwnProperty('styles')) { this.styles = config.styles; }
+    }
 
     var img = new Image(), o = {};
     o.$ = this;
@@ -104,13 +123,13 @@
 
     img.onload = function() {
 
-      var styles = DEFAULT_STYLES,
+      var styles = merge(DEFAULT_STYLES, o.$.styles),
           body = document.body
 
       body.appendChild(o.node);
       o.$.resize();
 
-      o.$.events.start(url);
+      o.$.events.start(o.$.url);
 
       styles.image = 'url(' + this.src + ')';
 
@@ -125,10 +144,10 @@
         if (val >= 1) {
 
           var
-          styles = DEFAULT_STYLES;
+          styles = merge(DEFAULT_STYLES, o.$.styles);
 
           styles.image = 'url(' + img.src  + ')';
-          o.$.events.end(url);
+          o.$.events.end(o.$.url);
 
           _applyStyles(document.body, styles);
           o.node.parentNode.removeChild(o.node);
@@ -137,14 +156,14 @@
         }
       };
 
-      var interval = window.setInterval(anim, 10);
+      var interval = window.setInterval(anim, o.$.duration / 100);
 
       window.addEventListener('resize', function(e) {
         o.$.resize();
       });
     };
 
-    img.src = url;
+    img.src = this.url;
     return this;
   };
 
@@ -187,7 +206,7 @@ YUI.add('backdrop', function(Y) {
      @constructor
      @param config {Object}
        'url' (string) - the path to the background image
-       'id' (string, optional) - 
+       'id' (string, optional) -
        'duration' (float, optional) - seconds
 
     var Backdrop = function(config) {
@@ -207,7 +226,7 @@ YUI.add('backdrop', function(Y) {
     Backdrop.ATTRS = {
 
       /**
-      The path to the background image 
+      The path to the background image
       @property url
       @type {String}
 
@@ -216,7 +235,7 @@ YUI.add('backdrop', function(Y) {
       },
 
       /**
-      The id attribute applied to the backdrop <div> 
+      The id attribute applied to the backdrop <div>
       @property id
       @default 'backdrop'
       @type {String}
