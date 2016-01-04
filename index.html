@@ -2,25 +2,17 @@
 <html lang="en">
 <head>
 <title>Backdrop</title>
-
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="http://davidfmiller.github.io/man-css/man.css">
 
 <style>
-/*
-YUI 3.5.0 (build 5089)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}#yui3-css-stamp.cssreset{display:none}
-
-html {
-  background: #000;
-}
 
 body {
-  color: #fff;
-  font: 13px arial;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  width: 100%;
+}
+
+html {
+
 }
 
 div {
@@ -34,32 +26,6 @@ div {
   padding-top: 50px;
 }
 
-h1 {
-  font-size: 20px;
-}
-
-p {
-  padding: 1em 100px 1em 0;
-}
-
-dl {
-  padding-right: 100px;
-}
-
-dd {
-  padding-left: 25px;
-  padding-bottom: 1em
-}
-
-pre, code {
-  color: yellow;
-}
-
-pre {
-  background: rgba(0,0,0,0.1);
-  padding: 10px;
-}
-
 #backdrop {
   left: 0;
   margin: 0;
@@ -68,6 +34,8 @@ pre {
   position: absolute;
   top: 0;
   z-index: 0;
+
+ 
 }
 
 </style>
@@ -75,15 +43,15 @@ pre {
 <body>
 
 <div id="doc">
-  <h1>Backdrop</h1>
+  <h1><i>🖼</i>Backdrop</h1>
   <p>
-    Backdrop is a simple YUI module to preload an image and gracefully apply it as the background elment for the <code>body</code> of the page. There are three parameters in the object's constructor configuration, although only the first is required:
+    Backdrop is a simple JavaScript module to preload an image and gracefully apply it as the background elment for the <code>body</code> of the page. There are three parameters in the object's constructor configuration, although only the first is required:
   </p>
   <dl>
     <dt><code>url</code></dt>
     <dd>the path to the image that should be applied as the background image</dd>
     <dt><code>id</code> (optional)</dt>
-    <dd>the id to apply the element ; defaults to "backdrop"</dd>
+    <dd>the id to apply the element; defaults to <code>`backdrop`</code></dd>
     <dt><code>duration</code> (optional)</dt>
     <dd>the length of time (in seconds) taken to introduce the backdrop; defaults to 1 second</dd>
     <dt><code>styles</code> (optional)</dt>
@@ -103,18 +71,34 @@ pre {
 
   <p>An example implementation follows:</p>
 
-  <pre>
-new Y.Backdrop({
+  <pre>var drop = new Backdrop({
   url : 'http://davidfmiller.github.com/assets/img/backdrop.jpg',
   id : 'backdrop',
   duration : 1,
-}).on('end', function(e) { Y.log('dropped'); });</pre>
+});
+drop.on('end', function(url) { window.console.log('dropped', url); });</pre>
 
   <button class="backdrop">Backdrop</button>
   <button class="kaos">Kaos</button>
 
 </div>
 
+<script src="backdrop-native.js"></script>
+<script>
+  var dropper = new Backdrop();
+  dropper.on('end', function(url) { window.console.log('dropped', url); });
+  dropper.on('start', function(url) { window.console.log('started', url); });
+
+  document.querySelector('button.backdrop').addEventListener('click', function(e) {
+    dropper.drop('http://davidfmiller.github.io/assets/img/backdrop/backdrop.jpg');
+  });
+
+  document.querySelector('button.kaos').addEventListener('click', function(e) {
+    dropper.drop('http://davidfmiller.github.io/assets/img/backdrop/kaos.jpg');
+  });
+</script>
+
+<!--
 <script src="http://yui.yahooapis.com/3.11.0/build/yui/yui-min.js"></script>
 <script>
   YUI({
@@ -151,5 +135,6 @@ new Y.Backdrop({
     });
   });
 </script>
+-->
 </body>
 </html>
