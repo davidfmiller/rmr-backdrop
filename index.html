@@ -49,8 +49,6 @@ div {
     <dd>the path to the image that should be applied as the background image</dd>
     <dt><code>id</code> (optional)</dt>
     <dd>the id to apply the element; defaults to <code>`backdrop`</code></dd>
-    <dt><code>duration</code> (optional)</dt>
-    <dd>the length of time (in seconds) taken to introduce the backdrop; defaults to 1 second</dd>
     <dt><code>styles</code> (optional)</dt>
     <dd>object containing the background property names (ex: <code>position</code>, <code>repeat</code>, <code>size</code>) and the respective values that should be applied to the backdrop</dd>
   </dl>
@@ -88,12 +86,12 @@ div {
   dropper.on('start', function(url) { window.console.log('started', url); });
 
   document.querySelector('button.backdrop').addEventListener('click', function(e) {
-    dropper.drop('http://davidfmiller.github.io/assets/img/backdrop/backdrop.jpg');
+    dropper.drop('assets/backdrop.jpg');
   });
 
   document.querySelector('button.kaos').addEventListener('click', function(e) {
     dropper.drop({
-      'url' : 'http://davidfmiller.github.io/assets/img/backdrop/kaos.jpg',
+      'url' : 'assets/kaos.jpg',
       'duration' : 0.5,
       'styles' : { 'position' : '50% top', 'color' : '#000', 'size' : 'contain' }
     });
