@@ -7,10 +7,20 @@
   'use strict';
 
   var
-  RESIZE_LISTENED = false,
-  DEFAULT_STYLES = { 'color' : 'transparent', 'position' : 'top left', 'repeat' : 'no-repeat', 'attachment' : 'fixed', 'size' : 'cover' },
 
-    /*
+  //
+  RESIZE_LISTENED = false,
+
+  //
+  DEFAULT_STYLES = {
+    'color' : 'transparent',
+    'position' : 'top left',
+    'repeat' : 'no-repeat',
+    'attachment' : 'fixed',
+    'size' : 'cover'
+  },
+
+  /*
    * Retrieve an object containing { top : xx, left : xx, bottom: xx, right: xx, width: xx, height: xx }
    *
    * @param node (DOMNode)
@@ -82,7 +92,7 @@
 
     this.id = config.hasOwnProperty('id') ? config.id : 'backdrop';
     this.url = config.hasOwnProperty('url') ? config.url : null;
-    this.duration = config.hasOwnProperty('duration') ? config.duration :1;
+//    this.duration = config.hasOwnProperty('duration') ? config.duration :1;
     this.styles = config.hasOwnProperty('styles') ? config.styles : null;
 
     if (this.url) {
@@ -111,7 +121,7 @@
       this.styles = null;
     } else if (config) {
       if (config.hasOwnProperty('url')) { this.url = config.url; }
-      if (config.hasOwnProperty('duration')) { this.duration = config.duration; }
+//      if (config.hasOwnProperty('duration')) { this.duration = config.duration; }
       if (config.hasOwnProperty('styles')) { this.styles = config.styles; }
     }
 
@@ -139,7 +149,7 @@
       var val = 0;
       var anim = function() {
 
-        val += 0.02;
+        val += 0.04;
         o.node.style.opacity = val;
 
         if (val >= 1) {
@@ -157,7 +167,7 @@
         }
       };
 
-      var interval = window.setInterval(anim, o.$.duration / 100);
+      var interval = window.setInterval(anim, 15);
 
       if (! RESIZE_LISTENED) {
         window.addEventListener('resize', function(e) {
