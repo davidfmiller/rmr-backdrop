@@ -82,7 +82,6 @@
 
     this.id = config.hasOwnProperty('id') ? config.id : 'backdrop';
     this.url = config.hasOwnProperty('url') ? config.url : null;
-    this.duration = config.hasOwnProperty('duration') ? config.duration :1;
     this.styles = config.hasOwnProperty('styles') ? config.styles : null;
 
     if (this.url) {
@@ -111,7 +110,6 @@
       this.styles = null;
     } else if (config) {
       if (config.hasOwnProperty('url')) { this.url = config.url; }
-      if (config.hasOwnProperty('duration')) { this.duration = config.duration; }
       if (config.hasOwnProperty('styles')) { this.styles = config.styles; }
     }
 
@@ -139,7 +137,7 @@
       var val = 0;
       var anim = function() {
 
-        val += 0.02;
+        val += 0.04;
         o.node.style.opacity = val;
 
         if (val >= 1) {
@@ -157,7 +155,7 @@
         }
       };
 
-      var interval = window.setInterval(anim, o.$.duration / 100);
+      var interval = window.setInterval(anim, 10);
 
       if (! RESIZE_LISTENED) {
         window.addEventListener('resize', function(e) {
@@ -183,7 +181,7 @@
     document.body.style.minHeight = window.innerHeight + 'px';
 
     if (node) {
-        setStyles(node, { width : rect.width + 'px',  height : rect.height + 'px' });
+      setStyles(node, { width : rect.width + 'px',  height : rect.height + 'px' });
     }
 
     return this;
