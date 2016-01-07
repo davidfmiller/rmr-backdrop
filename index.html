@@ -85,14 +85,12 @@ div {
   dropper.on('start', function(url) { window.console.log('started', url); });
 
   document.querySelector('button.backdrop').addEventListener('click', function(e) {
-    dropper.drop({
-      'url' : 'http://davidfmiller.github.io/assets/img/backdrop/backdrop.jpg'
-    });
+    dropper.drop('assets/backdrop.jpg');
   });
 
   document.querySelector('button.kaos').addEventListener('click', function(e) {
     dropper.drop({
-      'url' : 'http://davidfmiller.github.io/assets/img/backdrop/kaos.jpg',
+      'url' : 'assets/kaos.jpg',
       'styles' : { 'position' : '50% top', 'color' : '#000', 'size' : 'contain' }
     });
   });
