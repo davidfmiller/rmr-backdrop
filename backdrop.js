@@ -21,6 +21,16 @@
   },
 
   /*
+   * Generate a unique string suitable for id attributes
+   *
+   * @param basename (String)
+   * @return string
+   */
+  guid = function(basename) {
+    return basename + '-' + parseInt(Math.random() * 100, 10) + '-' + parseInt(Math.random() * 1000, 10);
+  },
+
+  /*
    * Retrieve an object containing { top : xx, left : xx, bottom: xx, right: xx, width: xx, height: xx }
    *
    * @param node (DOMNode)
@@ -90,7 +100,8 @@
       'start' : function() { }
     };
 
-    this.id = config.hasOwnProperty('id') ? config.id : 'backdrop';
+    this.node = config.hasOwnProperty('node') ? config.node : document.body;
+    this.id = config.hasOwnProperty('id') ? config.id : guid('backdrop');
     this.url = config.hasOwnProperty('url') ? config.url : null;
     this.styles = config.hasOwnProperty('styles') ? config.styles : null;
 
@@ -127,15 +138,16 @@
     o.$ = this;
     o.node = document.createElement('div');
     o.node.setAttribute('id', this.id);
+    o.node.classList.add('rmr-backdrop');
 
     o.$.resize();
 
     img.onload = function() {
 
-      var styles = merge(DEFAULT_STYLES, o.$.styles),
-          body = document.body;
+      var
+      styles = merge(DEFAULT_STYLES, o.$.styles);
 
-      body.appendChild(o.node);
+      o.$.node.appendChild(o.node);
       o.$.resize();
 
       o.$.events.start(o.$.url);
@@ -158,7 +170,7 @@
           styles.image = 'url(' + img.src  + ')';
           o.$.events.end(o.$.url);
 
-          _applyStyles(document.body, styles);
+          _applyStyles(o.$.node, styles);
           o.node.parentNode.removeChild(o.node);
 
           window.clearInterval(interval);
@@ -186,9 +198,11 @@
     rect = null,
     node = document.getElementById(this.id);
 
-    rect = getRect(document.body);
+    rect = getRect(this.node);
 
-    document.body.style.minHeight = window.innerHeight + 'px';
+    if (this.node == document.body) {
+      document.body.style.minHeight = window.innerHeight + 'px';
+    }
 
     if (node) {
       setStyles(node, { width : rect.width + 'px',  height : rect.height + 'px' });
