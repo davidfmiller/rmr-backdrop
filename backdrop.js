@@ -6,6 +6,9 @@
 
   'use strict';
 
+  // prevent duplicate declaration
+  if (windw.Backdrop) { return; }
+
   var
 
   //
