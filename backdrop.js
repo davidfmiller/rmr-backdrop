@@ -7,7 +7,7 @@
   'use strict';
 
   // prevent duplicate declaration
-  if (windw.Backdrop) { return; }
+  if (window.Backdrop) { return; }
 
   var
 
