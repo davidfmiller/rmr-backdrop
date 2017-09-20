@@ -90,11 +90,12 @@ div {
 </div>
 
 
-<script src="backdrop.js"></script>
+<script src="build/backdrop.bundle.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function(event) {
   var
-  backgroundDropper = new Backdrop(),
-  divDropper = new Backdrop({ node : document.getElementById('drop-target'), 'id' : 'backdrop-node' });
+  backgroundDropper = new window.Backdrop(),
+  divDropper = new window.Backdrop({ node : document.getElementById('drop-target'), 'id' : 'backdrop-node' });
 
   backgroundDropper.on('end', function(url) { window.console.log('dropped', url); });
   backgroundDropper.on('start', function(url) { window.console.log('started', url); });
@@ -109,6 +110,8 @@ div {
       'styles' : { 'position' : '50% top', 'color' : '#000', 'size' : 'contain', 'position' : '0 0', 'attachment' : 'scroll' }
     });
   });
+});
+
 </script>
 </body>
 </html>

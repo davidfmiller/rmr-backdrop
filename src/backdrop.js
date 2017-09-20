@@ -7,7 +7,7 @@
   'use strict';
 
   // prevent duplicate declaration
-  if (window.Backdrop) { return; }
+//  if (window.Backdrop) { return; }
 
   var
 
@@ -94,7 +94,7 @@
   };
 
 
-  window.Backdrop = function(config) {
+  var Backdrop = function(config) {
 
     if (! config) { config = {}; }
 
@@ -121,13 +121,13 @@
     * @param {Function} func - function to invoke when event occurs
     * @chainable
     */
-  window.Backdrop.prototype.on = function(event, func) {
+  Backdrop.prototype.on = function(event, func) {
     this.events[event] = func;
     return this;
   };
 
 
-  window.Backdrop.prototype.drop = function(config) {
+  Backdrop.prototype.drop = function(config) {
 
     if (typeof config === 'string') {
       this.url = config;
@@ -194,7 +194,7 @@
     return this;
   };
 
-  window.Backdrop.prototype.resize = function() {
+  Backdrop.prototype.resize = function() {
 
     var
     body = document.body,
@@ -214,8 +214,10 @@
     return this;
   };
 
-  window.Backdrop.prototype.toString = function() {
+  Backdrop.prototype.toString = function() {
     return '[Backdrop v0.1]';
   };
+
+  module.exports = Backdrop;
 
 }());
