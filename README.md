@@ -1,4 +1,4 @@
-A JavaScript module for smooth background image loading used on [http://readmeansrun.com](http://readmeansrun.com).
+A JavaScript module for smooth background image loading used on [https://readmeansrun.com](https://readmeansrun.com).
 
 Events:
 
@@ -30,5 +30,5 @@ dropper.drop({
 
 ```
 
-Free to use, please include a link to [http://readmeansrun.com](http://readmeansrun.com) in your page's source.
+Free to use, please include a link to [https://readmeansrun.com](https://readmeansrun.com) in your page's source.
 
