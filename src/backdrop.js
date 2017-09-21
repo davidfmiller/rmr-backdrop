@@ -103,7 +103,7 @@
       'start' : function() { }
     };
 
-    this.node = config.hasOwnProperty('node') ? config.node : document.body;
+    this.node = config.hasOwnProperty('node') ? (typeof config.node === 'string' ? document.querySelector(config.node) : config.node) : document.body;
     this.id = config.hasOwnProperty('id') ? config.id : guid('backdrop');
     this.url = config.hasOwnProperty('url') ? config.url : null;
     this.styles = config.hasOwnProperty('styles') ? config.styles : null;

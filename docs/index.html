@@ -87,7 +87,7 @@ div {
 document.addEventListener('DOMContentLoaded', function(event) {
   var
   backgroundDropper = new window.Backdrop(),
-  divDropper = new window.Backdrop({ node : document.getElementById('drop-target'), 'id' : 'backdrop-node' });
+  divDropper = new window.Backdrop({ node : '#drop-target', 'id' : 'backdrop-node' });
 
   backgroundDropper.on('end', function(url) { window.console.log('dropped', url); });
   backgroundDropper.on('start', function(url) { window.console.log('started', url); });
