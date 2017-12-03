@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="http://davidfmiller.github.io/man/man.css">
 
+<link rel="stylesheet" type="text/css" href="build/backdrop.css">
 <style>
 
 body {
@@ -25,15 +26,6 @@ div {
   margin: 0 auto;
 }
 
-.rmr-backdrop {
-  left: 0;
-  margin: 0;
-  opacity: 0;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  z-index: 0;
-}
 
 #drop-target {
   float: right;
@@ -95,7 +87,7 @@ div {
 document.addEventListener('DOMContentLoaded', function(event) {
   var
   backgroundDropper = new window.Backdrop(),
-  divDropper = new window.Backdrop({ node : document.getElementById('drop-target'), 'id' : 'backdrop-node' });
+  divDropper = new window.Backdrop({ node : '#drop-target', 'id' : 'backdrop-node' });
 
   backgroundDropper.on('end', function(url) { window.console.log('dropped', url); });
   backgroundDropper.on('start', function(url) { window.console.log('started', url); });
