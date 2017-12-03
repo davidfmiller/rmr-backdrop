@@ -1,26 +1,22 @@
-/* jshint undef: true,strict:true,trailing:true */
-/* global document,window,Image */
-
 
 (function() {
-
   'use strict';
 
   // prevent duplicate declaration
 //  if (window.Backdrop) { return; }
 
-  var
-
+  let
   //
-  RESIZE_LISTENED = false,
+  RESIZE_LISTENED = false;
 
+  const
   //
   DEFAULT_STYLES = {
-    'color' : 'transparent',
-    'position' : 'top left',
-    'repeat' : 'no-repeat',
-    'attachment' : 'fixed',
-    'size' : 'cover'
+    'color': 'transparent',
+    'position': 'top left',
+    'repeat': 'no-repeat',
+    'attachment': 'fixed',
+    'size': 'cover'
   },
 
   /*
@@ -34,16 +30,15 @@
   },
 
   /*
-   * Retrieve an object containing { top : xx, left : xx, bottom: xx, right: xx, width: xx, height: xx }
+   * Retrieve an object containing { top: xx, left: xx, bottom: xx, right: xx, width: xx, height: xx }
    *
    * @param node (DOMNode)
    */
   getRect = function(node) {
-
-    var rect = node.getBoundingClientRect();
+    const rect = node.getBoundingClientRect();
 
     // create a new object that is not read-only
-    var ret = { top : rect.top, left : rect.left, bottom: rect.bottom, right : rect.right };
+    const ret = { top: rect.top, left: rect.left, bottom: rect.bottom, right: rect.right };
 
     ret.top += window.pageYOffset;
     ret.left += window.pageXOffset;
@@ -65,27 +60,33 @@
    * @return Object
    */
   merge = function(a, b) {
-    var o = {};
-    for (var i in a) {
-      o[i] = a[i];
+    let i;
+    const o = {};
+    for (i in a) {
+      if (a.hasOwnProperty(i)) {
+        o[i] = a[i];
+      }
     }
     for (i in b) {
-      o[i] = b[i];
+      if (b.hasOwnProperty(i)) {
+        o[i] = b[i];
+      }
     }
     return o;
   },
 
   setStyles = function(node, styles) {
-    for (var key in styles) {
-      node.style[key] = styles[key];
+    for (const key in styles) {
+      if (styles.hasOwnProperty(key)) {
+        node.style[key] = styles[key];
+      }
     }
   },
 
   _applyStyles = function(node, styles) {
-    for (var s in styles) {
+    for (const s in styles) {
       if (styles.hasOwnProperty(s)) {
-
-        var key = 'background' + s.charAt(0).toUpperCase() + s.substr(1),
+        const key = 'background' + s.charAt(0).toUpperCase() + s.substr(1),
         style = styles[s];
 
         node.style[key] = style;
@@ -94,13 +95,14 @@
   };
 
 
-  var Backdrop = function(config) {
-
-    if (! config) { config = {}; }
+  const Backdrop = function(config) {
+    if (! config) {
+      config = {};
+    }
 
     this.events = {
-      'end' : function() { },
-      'start' : function() { }
+      'end': function() { },
+      'start': function() { }
     };
 
     this.node = config.hasOwnProperty('node') ? config.node : document.body;
@@ -117,27 +119,31 @@
    /**
     * Assign handler for a Screen event
     *
-    * @param {String} e - event name to attach to, one of 'fullscreen' or 'exit'
+    * @param {String} eventName - event name to attach to, one of 'fullscreen' or 'exit'
     * @param {Function} func - function to invoke when event occurs
+    * @return {Object} Instance of backdrop for chaining
     * @chainable
     */
-  Backdrop.prototype.on = function(event, func) {
-    this.events[event] = func;
+  Backdrop.prototype.on = function(eventName, func) {
+    this.events[eventName] = func;
     return this;
   };
 
 
   Backdrop.prototype.drop = function(config) {
-
     if (typeof config === 'string') {
       this.url = config;
       this.styles = null;
     } else if (config) {
-      if (config.hasOwnProperty('url')) { this.url = config.url; }
-      if (config.hasOwnProperty('styles')) { this.styles = config.styles; }
+      if (config.hasOwnProperty('url')) {
+        this.url = config.url;
+      }
+      if (config.hasOwnProperty('styles')) {
+        this.styles = config.styles;
+      }
     }
 
-    var img = new Image(), o = {};
+    const img = new Image(), o = {};
     o.$ = this;
     o.node = document.createElement('div');
     o.node.setAttribute('id', this.id);
@@ -146,8 +152,7 @@
     o.$.resize();
 
     img.onload = function() {
-
-      var
+      const
       styles = merge(DEFAULT_STYLES, o.$.styles);
 
       o.$.node.appendChild(o.node);
@@ -159,15 +164,15 @@
 
       _applyStyles(o.node, styles);
 
-      var val = 0;
-      var anim = function() {
+      let val = 0,
+      interval;
 
+      const anim = function() {
         val += 0.04;
         o.node.style.opacity = val;
 
         if (val >= 1) {
-
-          var
+          const
           styles = merge(DEFAULT_STYLES, o.$.styles);
 
           styles.image = 'url(' + img.src  + ')';
@@ -177,13 +182,14 @@
           o.node.parentNode.removeChild(o.node);
 
           window.clearInterval(interval);
+          interval = null;
         }
       };
 
-      var interval = window.setInterval(anim, 10);
+      interval = window.setInterval(anim, 10);
 
       if (! RESIZE_LISTENED) {
-        window.addEventListener('resize', function(e) {
+        window.addEventListener('resize', function() {
           o.$.resize();
         });
       }
@@ -195,20 +201,16 @@
   };
 
   Backdrop.prototype.resize = function() {
-
-    var
-    body = document.body,
-    rect = null,
-    node = document.getElementById(this.id);
-
+    const
+    node = document.getElementById(this.id),
     rect = getRect(this.node);
 
-    if (this.node == document.body) {
+    if (this.node === document.body) {
       document.body.style.minHeight = window.innerHeight + 'px';
     }
 
     if (node) {
-      setStyles(node, { width : rect.width + 'px',  height : rect.height + 'px' });
+      setStyles(node, { width: rect.width + 'px',  height: rect.height + 'px' });
     }
 
     return this;
@@ -219,5 +221,4 @@
   };
 
   module.exports = Backdrop;
-
-}());
+})();
