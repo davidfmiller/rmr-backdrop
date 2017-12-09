@@ -155,6 +155,7 @@
     o.$ = this;
     o.node = document.createElement('div');
     o.node.setAttribute('id', this.id);
+    o.node.setAttribute('aria-hidden', true);
     o.node.classList.add('rmr-backdrop');
 
     o.$.resize();
