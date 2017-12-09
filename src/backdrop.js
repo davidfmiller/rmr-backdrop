@@ -139,8 +139,7 @@
     } else if (config) {
       if (config.hasOwnProperty('url')) {
         this.src = config.url;
-      }
-      else if (config.hasOwnProperty('src')) {
+      } else if (config.hasOwnProperty('src')) {
         this.src = config.src;
       }
 
