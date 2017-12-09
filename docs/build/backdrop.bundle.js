@@ -163,12 +163,16 @@
       }
     }
   },
-        _applyStyles = function (node, styles) {
+
+
+  /*
+   apply background-* style attributes to a node
+  */
+  _applyStyles = function (node, styles) {
     for (const s in styles) {
       if (styles.hasOwnProperty(s)) {
         const key = 'background' + s.charAt(0).toUpperCase() + s.substr(1),
               style = styles[s];
-
         node.style[key] = style;
       }
     }
@@ -186,11 +190,11 @@
 
     this.node = config.hasOwnProperty('node') ? typeof config.node === 'string' ? document.querySelector(config.node) : config.node : document.body;
     this.id = config.hasOwnProperty('id') ? config.id : guid('backdrop');
-    this.url = config.hasOwnProperty('url') ? config.url : null;
+    this.src = config.hasOwnProperty('url') ? config.url : config.src;
     this.styles = config.hasOwnProperty('styles') ? config.styles : null;
 
-    if (this.url) {
-      this.drop(this.url);
+    if (this.src) {
+      this.drop(this.src);
     }
   };
 
@@ -209,12 +213,15 @@
 
   Backdrop.prototype.drop = function (config) {
     if (typeof config === 'string') {
-      this.url = config;
+      this.src = config;
       this.styles = null;
     } else if (config) {
       if (config.hasOwnProperty('url')) {
-        this.url = config.url;
+        this.src = config.url;
+      } else if (config.hasOwnProperty('src')) {
+        this.src = config.src;
       }
+
       if (config.hasOwnProperty('styles')) {
         this.styles = config.styles;
       }
@@ -235,9 +242,9 @@
       o.$.node.appendChild(o.node);
       o.$.resize();
 
-      o.$.events.start(o.$.url);
+      o.$.events.start(o.$.src);
 
-      styles.image = 'url(' + this.src + ')';
+      styles.image = 'url(' + (this.currentSrc ? this.currentSrc : this.src) + ')';
 
       _applyStyles(o.node, styles);
 
@@ -251,8 +258,8 @@
         if (val >= 1) {
           const styles = merge(DEFAULT_STYLES, o.$.styles);
 
-          styles.image = 'url(' + img.src + ')';
-          o.$.events.end(o.$.url);
+          styles.image = 'url(' + (img.currentSrc ? img.currentSrc : img.src) + ')';
+          o.$.events.end(o.$.src);
 
           _applyStyles(o.$.node, styles);
           o.node.parentNode.removeChild(o.node);
@@ -272,7 +279,7 @@
       RESIZE_LISTENED = true;
     };
 
-    img.src = this.url;
+    img.srcset = this.src;
     return this;
   };
 
