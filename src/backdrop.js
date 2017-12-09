@@ -1,5 +1,5 @@
 
-(function() {
+(function _() {
   'use strict';
 
   // prevent duplicate declaration
@@ -109,8 +109,9 @@
 
     this.node = config.hasOwnProperty('node') ? (typeof config.node === 'string' ? document.querySelector(config.node) : config.node) : document.body;
     this.id = config.hasOwnProperty('id') ? config.id : guid('backdrop');
-    this.src = config.hasOwnProperty('url') ? config.url : config.src;
+    this.src = config.hasOwnProperty('url') ? config.url : config.hasOwnProperty('src') ? config.src : config.srcset;
     this.styles = config.hasOwnProperty('styles') ? config.styles : null;
+
 
     if (this.src) {
       this.drop(this.src);
@@ -141,6 +142,8 @@
         this.src = config.url;
       } else if (config.hasOwnProperty('src')) {
         this.src = config.src;
+      } else if (config.hasOwnProperty('srcset')) {
+        this.src = config.srcset;
       }
 
       if (config.hasOwnProperty('styles')) {
@@ -194,7 +197,7 @@
       interval = window.setInterval(anim, 10);
 
       if (! RESIZE_LISTENED) {
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function resizeListener() {
           o.$.resize();
         });
       }
