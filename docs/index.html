@@ -3,7 +3,7 @@
 <head>
 <title>Backdrop</title>
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="http://davidfmiller.github.io/man/man.css">
+<link rel="stylesheet" type="text/css" href="https://davidfmiller.github.io/man/man.css">
 
 <link rel="stylesheet" type="text/css" href="build/backdrop.css">
 <style>
@@ -21,7 +21,7 @@ div {
   z-index: 1;
 }
 
-#doc {
+#man {
   width: 800px;
   margin: 0 auto;
 }
@@ -37,18 +37,18 @@ div {
 </head>
 <body>
 
-<div id="doc">
+<div id="man">
   <h1><i>🎨</i>Backdrop</h1>
   <p>
     Backdrop is a simple JavaScript module to preload an image and gracefully apply it as the background elment for the <code>body</code> of the page. There are three parameters in the object's constructor configuration, although only the first is required:
   </p>
   <dl>
     <dt><code>node</code></dt>
-    <dd>the query selector for the element whose background should be applied</dd>
-    <dt><code>url</code></dt>
+    <dd>the query selector for the element (or a reference to the element itself) whose background should be applied</dd>
+    <dt><code>src</code> | <code>srcset</code></dt>
     <dd>the path to the image that should be applied as the background image</dd>
     <dt><code>id</code> (optional)</dt>
-    <dd>the id to apply the element; defaults to <code>`backdrop`</code></dd>
+    <dd>the id to apply the element (defaults to <code>`backdrop`</code> if none provided)</dd>
     <dt><code>styles</code> (optional)</dt>
     <dd>object containing the background property names (ex: <code>position</code>, <code>repeat</code>, <code>size</code>) and the respective values that should be applied to the backdrop</dd>
   </dl>
@@ -79,9 +79,14 @@ div {
 
   </div>
 
-</div>
 
+<hr>
+<p>
+  <a href="https://github.com/davidfmiller/backdrop">Backdrop</a> by <a href="https://readmeansrun.com/" title="READMEANSRUN">READMEANSRUN</a>
+</p>
 
+</doc>
+<script src="https://davidfmiller.github.io/man/man.js"></script>
 <script src="build/backdrop.bundle.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function(event) {
@@ -98,10 +103,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   document.querySelector('button.kaos').addEventListener('click', function(e) {
     divDropper.drop({
-      'url' : 'assets/kaos.jpg',
+      'srcset' : 'assets/kaos.jpg',
       'styles' : { 'position' : '50% top', 'color' : '#000', 'size' : 'contain', 'position' : '0 0', 'attachment' : 'scroll' }
     });
   });
+
+  window.Man({pre: true});
+
 });
 
 </script>

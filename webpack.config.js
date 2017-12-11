@@ -1,25 +1,26 @@
-/*jshint esnext:true */
-/* globals require, __dirname, module */
- 
- 
+
 const
+
     path = require('path'),
     webpack = require('webpack');
  
 //const ExtractTextPlugin = require('extract-text-webpack-plugin');
 //const extractCSS = new ExtractTextPlugin('[name].bundle.css');
- 
+
+
 const config = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'docs/build/'),
     filename: 'backdrop.bundle.js'
   },
+
   plugins : [
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false }
     })
   ],
+  watch: true,
   module : {
     rules : [
 /*
@@ -29,22 +30,20 @@ const config = {
       { loader: "sass-loader" } // compiles Sass to CSS
     ]},
 */
-    {
-      test : /\.js$/,
-      include : path.resolve(__dirname, 'src'),
-      use : [{
-        loader: 'babel-loader',
-        options : {
-          presets : [
-            ['es2015', { modules : false }]
-          ]
-        }
-      }]
-    }
-    
-    
+      {
+        test : /\.js$/,
+        include : path.resolve(__dirname, 'src'),
+        use : [{
+          loader: 'babel-loader',
+          options : {
+            presets : [
+              ['es2015', { modules : false }]
+            ]
+          }
+        }]
+      }
     ]
   }
 };
- 
+
 module.exports = config;
