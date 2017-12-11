@@ -3,8 +3,8 @@
  
  
 const
-    path = require('path');
-//    webpack = require('webpack');
+    path = require('path'),
+    webpack = require('webpack');
  
 //const ExtractTextPlugin = require('extract-text-webpack-plugin');
 //const extractCSS = new ExtractTextPlugin('[name].bundle.css');
@@ -15,6 +15,11 @@ const config = {
     path: path.resolve(__dirname, 'docs/build/'),
     filename: 'backdrop.bundle.js'
   },
+  plugins : [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    })
+  ],
   module : {
     rules : [
 /*
@@ -31,7 +36,7 @@ const config = {
         loader: 'babel-loader',
         options : {
           presets : [
-            //['es2015', { modules : false }]
+            ['es2015', { modules : false }]
           ]
         }
       }]
