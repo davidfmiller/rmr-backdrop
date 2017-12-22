@@ -10,6 +10,9 @@
   RESIZE_LISTENED = false;
 
   const
+
+  RMR = require('rmr-util'),
+
   //
   DEFAULT_STYLES = {
     'color': 'transparent',
@@ -25,32 +28,14 @@
    * @param basename (String)
    * @return string
    */
-  guid = function(basename) {
-    return basename + '-' + parseInt(Math.random() * 100, 10) + '-' + parseInt(Math.random() * 1000, 10);
-  },
+  guid = RMR.String.guid,
 
   /*
    * Retrieve an object containing { top: xx, left: xx, bottom: xx, right: xx, width: xx, height: xx }
    *
    * @param node (DOMNode)
    */
-  getRect = function(node) {
-    const rect = node.getBoundingClientRect();
-
-    // create a new object that is not read-only
-    const ret = { top: rect.top, left: rect.left, bottom: rect.bottom, right: rect.right };
-
-    ret.top += window.pageYOffset;
-    ret.left += window.pageXOffset;
-
-    ret.bottom += window.pageYOffset;
-    ret.right += window.pageYOffset;
-
-    ret.width = rect.right - rect.left;
-    ret.height = rect.bottom - rect.top;
-
-    return ret;
-  },
+  getRect = RMR.Node.getRect,
 
   /*
    *
@@ -59,29 +44,9 @@
 
    * @return Object
    */
-  merge = function(a, b) {
-    let i;
-    const o = {};
-    for (i in a) {
-      if (a.hasOwnProperty(i)) {
-        o[i] = a[i];
-      }
-    }
-    for (i in b) {
-      if (b.hasOwnProperty(i)) {
-        o[i] = b[i];
-      }
-    }
-    return o;
-  },
+  merge = RMR.Object.merge,
 
-  setStyles = function(node, styles) {
-    for (const key in styles) {
-      if (styles.hasOwnProperty(key)) {
-        node.style[key] = styles[key];
-      }
-    }
-  },
+  setStyles = RMR.Node.setStyles,
 
   /*
    apply background-* style attributes to a node
