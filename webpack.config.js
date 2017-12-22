@@ -3,8 +3,9 @@ const
   path = require('path'),
   webpack = require('webpack');
 
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const extractCSS = new ExtractTextPlugin('[name].bundle.css');
+//const ExtractTextPlugin = require('extract-text-webpack-plugin');
+//const extractCSS = new ExtractTextPlugin('[name].bundle.css');
+
 
 const config = {
   entry: './src/index.js',
@@ -12,7 +13,14 @@ const config = {
     path: path.resolve(__dirname, 'docs/build/'),
     filename: 'backdrop.bundle.js'
   },
+
+  plugins : [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    })
+  ],
   watch: true,
+
   plugins : [
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false }
