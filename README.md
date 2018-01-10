@@ -1,5 +1,7 @@
 A JavaScript module for smooth background image loading used on [https://readmeansrun.com](https://readmeansrun.com).
 
+See it in action [here](https://davidfmiller.github.io/backdrop).
+
 Events:
 
 - start: fired when a backdrop is about to be loaded
