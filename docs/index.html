@@ -100,23 +100,25 @@ document.addEventListener('DOMContentLoaded', function(event) {
   backgroundDropper.on('start', function(url) { window.console.log('started', url); });
 
   document.querySelector('button.backdrop').addEventListener('click', function(e) {
-    backgroundDropper.drop('assets/backdrop.jpg');
+    if (! backgroundDropper.isDropping()) {
+      backgroundDropper.drop('assets/backdrop.jpg');
+    }
   });
 
   document.querySelector('button.backdrop.alt').addEventListener('click', function(e) {
-    backgroundDropper.drop('assets/kaos.jpg');
+    if (! backgroundDropper.isDropping()) {
+      backgroundDropper.drop('assets/kaos.jpg');
+    }
   });
 
 
-  document.body.addEventListener('click', function(e) {
-    window.console.log('click', backgroundDropper.isDropping());
-  })
-
   document.querySelector('button.kaos').addEventListener('click', function(e) {
-    divDropper.drop({
-      'srcset' : 'assets/kaos.jpg',
-      'styles' : { 'position' : '50% top', 'color' : '#000', 'size' : 'contain', 'position' : '0 0', 'attachment' : 'scroll' }
-    });
+    if (! divDropper.isDropping()) {
+      divDropper.drop({
+        'srcset' : 'assets/kaos.jpg',
+        'styles' : { 'position' : '50% top', 'color' : '#000', 'size' : 'contain', 'position' : '0 0', 'attachment' : 'scroll' }
+      });
+    } else { console.log('nope'); }
   });
 
   window.Man({pre: true});
