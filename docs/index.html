@@ -74,6 +74,7 @@ div {
 <span class="nx">drop</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span> <span class="nb">window</span><span class="p">.</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;dropped&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span> <span class="p">});</span></pre>
 
   <button class="backdrop">Backdrop</button>
+  <button class="backdrop alt">Backdrop Alt</button>
   <button class="kaos">Kaos</button>
 
   <div id="drop-target">
@@ -101,6 +102,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
   document.querySelector('button.backdrop').addEventListener('click', function(e) {
     backgroundDropper.drop('assets/backdrop.jpg');
   });
+
+  document.querySelector('button.backdrop.alt').addEventListener('click', function(e) {
+    backgroundDropper.drop('assets/kaos.jpg');
+  });
+
+
+  document.body.addEventListener('click', function(e) {
+    window.console.log('click', backgroundDropper.isDropping());
+  })
 
   document.querySelector('button.kaos').addEventListener('click', function(e) {
     divDropper.drop({

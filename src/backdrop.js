@@ -76,13 +76,20 @@
     this.id = config.hasOwnProperty('id') ? config.id : guid('backdrop');
     this.src = config.hasOwnProperty('url') ? config.url : config.hasOwnProperty('src') ? config.src : config.srcset;
     this.styles = config.hasOwnProperty('styles') ? config.styles : null;
-
+    this._isDropping = false;
 
     if (this.src) {
       this.drop(this.src);
     }
   };
 
+  /**
+   *
+   * @return {Boolean}
+   */
+  Backdrop.prototype.isDropping = function() {
+    return this._isDropping;
+  };
 
    /**
     * Assign handler for a Screen event
@@ -116,6 +123,8 @@
       }
     }
 
+    this._isDropping = true;
+
     const img = new Image(), o = {};
     o.$ = this;
     o.node = document.createElement('div');
@@ -142,6 +151,7 @@
       interval;
 
       const anim = function() {
+
         val += 0.04;
         o.node.style.opacity = val;
 
@@ -157,6 +167,9 @@
 
           window.clearInterval(interval);
           interval = null;
+
+          o.$._isDropping = false
+
         }
       };
 
