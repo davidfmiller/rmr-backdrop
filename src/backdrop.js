@@ -163,13 +163,14 @@
           o.$.events.end(o.$.src);
 
           _applyStyles(o.$.node, styles);
-          o.node.parentNode.removeChild(o.node);
+          // prevent flicker
+          window.setTimeout(function() {
+            o.node.parentNode.removeChild(o.node);
+            o.$._isDropping = false
+          }, 10);
 
           window.clearInterval(interval);
           interval = null;
-
-          o.$._isDropping = false
-
         }
       };
 
