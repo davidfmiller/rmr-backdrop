@@ -92,6 +92,9 @@ div {
 <script src="build/backdrop.bundle.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function(event) {
+
+  window.Man({pre: true});
+
   var
   backgroundDropper = new window.Backdrop(),
   divDropper = new window.Backdrop({ node : '#drop-target', 'id' : 'backdrop-node' });
@@ -111,6 +114,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   });
 
+  backgroundDropper.drop({
+    'srcset' : 'assets/backdrop.jpg'
+  });
 
   document.querySelector('button.kaos').addEventListener('click', function(e) {
     if (! divDropper.isDropping()) {
@@ -121,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     } else { console.log('nope'); }
   });
 
-  window.Man({pre: true});
+
 
 });
 
