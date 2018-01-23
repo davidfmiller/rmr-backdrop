@@ -1,16 +1,15 @@
 {
-  "name": "backdrop",
-  "version": "0.1.0",
-  "description": "...",
+  "name": "rmr-backdrop",
+  "version": "0.1.1",
+  "description": "A backdrop for your webpage",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "davidfmiller",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/davidfmiller/backdrop/issues"
+    "url": "https://github.com/davidfmiller/rmr-backdrop/issues"
   },
-  "homepage": "https://github.com/davidfmiller/backdrop#readme",
+  "homepage": "https://github.com/davidfmiller/rmr-backdrop#readme",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
