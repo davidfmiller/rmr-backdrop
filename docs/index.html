@@ -81,7 +81,6 @@ div {
 
   </div>
 
-
 <hr>
 <p>
   <a href="https://github.com/davidfmiller/backdrop">Backdrop</a> by <a href="https://readmeansrun.com/" title="READMEANSRUN">READMEANSRUN</a>
@@ -93,11 +92,19 @@ div {
 <script>
 document.addEventListener('DOMContentLoaded', function(event) {
 
-  window.Man({pre: true});
+  window.Man({
+    pre: true
+  });
 
   var
-  backgroundDropper = new window.Backdrop(),
-  divDropper = new window.Backdrop({ node : '#drop-target', 'id' : 'backdrop-node' });
+  backgroundDropper = new window.Backdrop({
+    speed : 8
+  }),
+  divDropper = new window.Backdrop({
+    node : '#drop-target',
+    id : 'backdrop-node',
+    speed : 1
+    });
 
   backgroundDropper.on('end', function(url) { window.console.log('dropped', url); });
   backgroundDropper.on('start', function(url) { window.console.log('started', url); });

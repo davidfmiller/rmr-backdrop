@@ -62,6 +62,11 @@
   };
 
 
+  /**
+    node :
+    id :
+    styles :
+   */
   const Backdrop = function(config) {
     if (! config) {
       config = {};
@@ -72,11 +77,16 @@
       'start': function() { }
     };
 
+    this.speed = config.hasOwnProperty('speed') ? parseInt(config.speed, 10) : 5;
     this.node = config.hasOwnProperty('node') ? (typeof config.node === 'string' ? document.querySelector(config.node) : config.node) : document.body;
     this.id = config.hasOwnProperty('id') ? config.id : guid('backdrop');
-    this.src = config.hasOwnProperty('url') ? config.url : config.hasOwnProperty('src') ? config.src : config.srcset;
+/*    this.src = config.hasOwnProperty('url') ? config.url : config.hasOwnProperty('src') ? config.src : config.srcset; */
     this.styles = config.hasOwnProperty('styles') ? config.styles : null;
     this._isDropping = false;
+
+    if (! this.speed || this.speed > 10) {
+      this.speed = 5;
+    }
 
     if (this.src) {
       this.drop(this.src);
@@ -90,6 +100,7 @@
   Backdrop.prototype.isDropping = function() {
     return this._isDropping;
   };
+
 
    /**
     * Assign handler for a Screen event
@@ -105,6 +116,11 @@
   };
 
 
+  /**
+   *
+   *
+   *
+   */
   Backdrop.prototype.drop = function(config) {
     if (typeof config === 'string') {
       this.src = config;
@@ -135,6 +151,7 @@
     o.$.resize();
 
     img.onload = function() {
+
       const
       styles = merge(DEFAULT_STYLES, o.$.styles);
 
@@ -147,15 +164,16 @@
 
       _applyStyles(o.node, styles);
 
-      let val = 0,
-      interval;
+      let
+      val = 0;
 
-      const anim = function() {
+      const anim = function(timestamp) {
 
-        val += 0.04;
+        val += o.$.speed / 100;
         o.node.style.opacity = val;
 
         if (val >= 1) {
+
           const
           styles = merge(DEFAULT_STYLES, o.$.styles);
 
@@ -163,18 +181,21 @@
           o.$.events.end(o.$.src);
 
           _applyStyles(o.$.node, styles);
+
           // prevent flicker
           window.setTimeout(function() {
             o.node.parentNode.removeChild(o.node);
             o.$._isDropping = false
           }, 10);
-
-          window.clearInterval(interval);
-          interval = null;
+        }
+        else {
+          window.requestAnimationFrame(anim);
         }
       };
 
-      interval = window.setInterval(anim, 10);
+      window.requestAnimationFrame(anim);
+
+//      interval = window.setInterval(anim, 10);
 
       if (! RESIZE_LISTENED) {
         window.addEventListener('resize', function resizeListener() {
