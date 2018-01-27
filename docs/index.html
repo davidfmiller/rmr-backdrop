@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   var
   backgroundDropper = new window.Backdrop({
-    speed : 8
+    speed : 10
   }),
   divDropper = new window.Backdrop({
     node : '#drop-target',
@@ -120,11 +120,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
       backgroundDropper.drop('assets/kaos.jpg');
     }
   });
-
+/*
   backgroundDropper.drop({
     'srcset' : 'assets/backdrop.jpg'
   });
-
+*/
   document.querySelector('button.kaos').addEventListener('click', function(e) {
     if (! divDropper.isDropping()) {
       divDropper.drop({
