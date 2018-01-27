@@ -2,9 +2,6 @@
 (function _() {
   'use strict';
 
-  // prevent duplicate declaration
-//  if (window.Backdrop) { return; }
-
   let
   //
   RESIZE_LISTENED = false;
@@ -194,8 +191,6 @@
       };
 
       window.requestAnimationFrame(anim);
-
-//      interval = window.setInterval(anim, 10);
 
       if (! RESIZE_LISTENED) {
         window.addEventListener('resize', function resizeListener() {
