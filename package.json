@@ -4,6 +4,10 @@
   "description": "A backdrop for your webpage",
   "scripts": {
   },
+  "repository": {
+    "url": "https://github.com/davidfmiller/backdrop.git",
+    "type": "git"
+  },
   "author": "davidfmiller",
   "license": "ISC",
   "bugs": {
