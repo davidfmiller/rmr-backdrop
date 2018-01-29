@@ -1,9 +1,8 @@
 {
   "name": "rmr-backdrop",
-  "version": "0.1.0",
-  "description": "...",
+  "version": "0.1.2",
+  "description": "A backdrop for your webpage",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "url": "https://github.com/davidfmiller/rmr-backdrop.git",
