@@ -7,7 +7,7 @@ Events:
 - start: fired when a backdrop is about to be loaded
 - end: fired when a backdrop has been downloaded & applied to the page
 
-View more [here](https://davidfmiller.github.io/backdrop/).
+View more [here](https://davidfmiller.github.io/rmr-backdrop/).
 
 Example usage:
 
