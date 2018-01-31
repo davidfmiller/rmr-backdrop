@@ -1,6 +1,6 @@
 A JavaScript module for smooth background image loading used on [https://readmeansrun.com](https://readmeansrun.com).
 
-See it in action [here](https://davidfmiller.github.io/backdrop).
+See it in action [here](https://davidfmiller.github.io/rmr-backdrop).
 
 Events:
 
