@@ -65,29 +65,28 @@
     styles :
    */
   const Backdrop = function(config) {
-    if (! config) {
-      config = {};
+
+    const defaults = {
+      speed : 5,
+      node : document.body,
+      id : guid('backdrop'),
+      styles : {},
+      events : {
+        'end': function() { },
+        'start': function() { }
+      }
     }
 
-    this.events = {
-      'end': function() { },
-      'start': function() { }
-    };
+    config.events = RMR.Object.merge(defaults.events, config.events);
+    config = RMR.Object.merge(defaults, config);
 
-    this.speed = config.hasOwnProperty('speed') ? parseInt(config.speed, 10) : 5;
-    this.node = config.hasOwnProperty('node') ? (typeof config.node === 'string' ? document.querySelector(config.node) : config.node) : document.body;
-    this.id = config.hasOwnProperty('id') ? config.id : guid('backdrop');
-/*    this.src = config.hasOwnProperty('url') ? config.url : config.hasOwnProperty('src') ? config.src : config.srcset; */
-    this.styles = config.hasOwnProperty('styles') ? config.styles : null;
+    this.speed = config.speed;
+    this.node = RMR.Node.get(config.node);
+    this.id = config.id;
+    this.styles = config.styles;
+    this.events = config.events;
+
     this._isDropping = false;
-
-    if (! this.speed || this.speed > 10) {
-      this.speed = 5;
-    }
-
-    if (this.src) {
-      this.drop(this.src);
-    }
   };
 
   /**
@@ -123,9 +122,7 @@
       this.src = config;
       this.styles = null;
     } else if (config) {
-      if (config.hasOwnProperty('url')) {
-        this.src = config.url;
-      } else if (config.hasOwnProperty('src')) {
+      if (config.hasOwnProperty('src')) {
         this.src = config.src;
       } else if (config.hasOwnProperty('srcset')) {
         this.src = config.srcset;
