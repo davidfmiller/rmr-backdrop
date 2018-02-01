@@ -128,6 +128,10 @@
         this.src = config.srcset;
       }
 
+      if (config.node) {
+        this.node = RMR.Node.get(config.node);
+      }
+
       if (config.hasOwnProperty('styles')) {
         this.styles = config.styles;
       }
