@@ -13,8 +13,8 @@ Example usage:
 
 ```
 var dropper = new Backdrop({
-  'id' : 'backdrop',
-  'duration' : 0.5
+  id: 'backdrop',
+  duration: 0.5
 });
 
 dropper.on('start', function(e) {
@@ -26,8 +26,8 @@ dropper.on('end', function(e) {
 });
 
 dropper.drop({
-  'url' : 'http://davidfmiller.github.io/assets/img/backdrop/koru.jpg',
-  'styles' : { 'position' : 'left bottom', 'size' : 'cover'}
+  url: 'http://davidfmiller.github.io/assets/img/backdrop/koru.jpg',
+  styles: { position: 'left bottom', size: 'cover'}
 });
 
 ```
