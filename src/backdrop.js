@@ -60,22 +60,22 @@
 
 
   /**
-    node :
-    id :
-    styles :
+   * Create a Backdrop instance
+   *
+   * @param {Object} config -  node, id, styles
    */
   const Backdrop = function(config) {
 
     const defaults = {
-      speed : 5,
-      node : document.body,
-      id : guid('backdrop'),
-      styles : {},
-      events : {
-        'end': function() { },
-        'start': function() { }
+      speed: 5,
+      node: document.body,
+      id: guid('backdrop'),
+      styles: {},
+      events: {
+        end: function() { },
+        start: function() { }
       }
-    }
+    };
 
     config.events = RMR.Object.merge(defaults.events, config.events);
     config = RMR.Object.merge(defaults, config);
@@ -90,8 +90,9 @@
   };
 
   /**
+   * Determine if object is in the midst of transitioning
    *
-   * @return {Boolean}
+   * @return {Boolean} `true` if in transition; `false` if not
    */
   Backdrop.prototype.isDropping = function() {
     return this._isDropping;
@@ -113,9 +114,10 @@
 
 
   /**
+   * Transition to a new image
    *
-   *
-   *
+   * @param {Object} config - contain parameters
+   * @return {Object} self for chaining
    */
   Backdrop.prototype.drop = function(config) {
     if (typeof config === 'string') {
@@ -165,7 +167,7 @@
       let
       val = 0;
 
-      const anim = function(timestamp) {
+      const anim = function( ) {
 
         val += o.$.speed / 100;
         o.node.style.opacity = val;
@@ -181,12 +183,13 @@
           _applyStyles(o.$.node, styles);
 
           // prevent flicker
-          window.setTimeout(function() {
-            o.node.parentNode.removeChild(o.node);
-            o.$._isDropping = false
-          }, 10);
-        }
-        else {
+          window.setTimeout(
+            function() {
+              o.node.parentNode.removeChild(o.node);
+              o.$._isDropping = false;
+            }, 10
+          );
+        } else {
           window.requestAnimationFrame(anim);
         }
       };
