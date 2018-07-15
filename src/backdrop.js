@@ -65,6 +65,9 @@
    * @param {Object} config -  node, id, styles
    */
   const Backdrop = function(config) {
+    if (! config) {
+      config = {};
+    }
 
     const defaults = {
       speed: 5,
@@ -73,7 +76,8 @@
       styles: {},
       events: {
         end: function() { },
-        start: function() { }
+        start: function() { },
+        error: function() { }
       }
     };
 
@@ -150,7 +154,20 @@
 
     o.$.resize();
 
+    img.onerror = function(src) {
+      o.$.events.error(src);
+    }
+
     img.onload = function() {
+
+      if ('naturalHeight' in this && this.naturalHeight + this.naturalWidth === 0) {
+        this.onerror();
+        return;
+      }
+      else if (this.width + this.height == 0) {
+        this.onerror();
+        return;
+      }
 
       const
       styles = merge(DEFAULT_STYLES, o.$.styles);
