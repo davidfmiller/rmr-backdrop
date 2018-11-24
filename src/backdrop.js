@@ -155,6 +155,7 @@
     o.$.resize();
 
     img.onerror = function(src) {
+      o.$._isDropping = false;
       o.$.events.error(src);
     }
 

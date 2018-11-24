@@ -101,6 +101,7 @@
   <button class="backdrop">Chino</button>
   <button class="backdrop alt">Discovery</button>
   <button class="kaos">Kaos</button>
+  <button class="error">Error</button>
 
   <div id="drop-target">
 
@@ -126,31 +127,47 @@ document.addEventListener('DOMContentLoaded', function(event) {
     debug: true
   });
 
-  dropper.on('end', function(url) { window.console.log('dropped', url); });
-  dropper.on('start', function(url) { window.console.log('started', url); });
+  dropper.on('end', function(url) { console.log('dropped', url); });
+  dropper.on('start', function(url) { console.log('started', url); });
+  dropper.on('error', function(e) { console.log(e); alert('Backdrop not found'); });
 
   document.querySelector('button.backdrop').addEventListener('click', function(e) {
     if (! dropper.isDropping()) {
-      dropper.drop('https://dfm.photography/assets/img/photos/web.desktop/chino.jpg');
+      dropper.drop({
+        srcset: 'https://dfm.photography/assets/img/photos/web.desktop/chino.jpg',
+        styles: { 'position' : '50% bottom', 'color' : '#fff', 'size' : 'cover', 'position' : '0 0', 'attachment' : 'scroll' }
+
+      });
     }
   });
 
   document.querySelector('button.backdrop.alt').addEventListener('click', function(e) {
     if (! dropper.isDropping()) {
       dropper.drop({
-        'srcset' : 'https://dfm.photography/assets/img/photos/web.desktop/discovery.jpg',
-        'node': document.body
+        srcset: 'https://dfm.photography/assets/img/photos/web.desktop/discovery.jpg',
+        node: document.body,
+        styles: { 'position' : '50% top', 'color' : '#000', 'size' : 'cover', 'position' : '0 0', 'attachment' : 'scroll' }
       });
     }
   });
 
   document.querySelector('button.kaos').addEventListener('click', function(e) {
     if (! dropper.isDropping()) {
-
       dropper.drop({
-        'srcset' : 'assets/kaos.jpg',
-        'node' : '#drop-target',
-        'styles' : { 'position' : '50% top', 'color' : '#000', 'size' : 'contain', 'position' : '0 0', 'attachment' : 'scroll' }
+        srcset: 'assets/kaos.jpg',
+        node: '#drop-target',
+        styles: { 'position' : '50% top', 'color' : '#000', 'size' : 'contain', 'position' : '0 0', 'attachment' : 'scroll' }
+      });
+
+    } else { console.log('nope'); }
+  });
+
+  document.querySelector('button.error').addEventListener('click', function(e) {
+    if (! dropper.isDropping()) {
+      dropper.drop({
+        srcset: 'http://url-doesnt-exist',
+        node: '#drop-target',
+        styles: { }
       });
 
     } else { console.log('nope'); }
