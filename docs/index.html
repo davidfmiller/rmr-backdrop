@@ -41,6 +41,10 @@
   #man {
     width: 800px;
     margin: 0 auto;
+    background: rgba(255,255,255,0.8);
+    border-radius: 10px;
+    padding: 20px 30px;
+    box-sizing: border-box;
   }
 
 
@@ -48,6 +52,11 @@
     float: right;
     width: 150px;
     height: 100px;
+    border-radius: 10px;
+  }
+
+  #drop-target div {
+    border-radius: 10px;
   }
 
   </style>
@@ -57,7 +66,7 @@
 <div id="man">
   <h1><i>🎨</i>Backdrop</h1>
   <p>
-    Backdrop is a simple JavaScript module to preload an image and gracefully apply it as the background elment for the <code>body</code> of the page. There are three parameters in the object's constructor configuration, although only the first is required:
+    Backdrop is a simple JavaScript module to preload an image and gracefully apply it as the background of a <code>node</code> in the page. There are three parameters in the object's constructor configuration, although only the first is required:
   </p>
   <dl>
     <dt><code>node</code></dt>
@@ -89,8 +98,8 @@
 <span class="nx">drop</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span> <span class="nb">window</span><span class="p">.</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;dropped&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span> <span class="p">});</span>
 <span class="nx">dropper</span><span class="p">.</span><span class="nx">drop</span><span class="p">({</span><span class="nx">srcset</span><span class="o">:</span> <span class="s1">&#39;https://path/to/image.jpg&#39;</span><span class="p">});</span></pre>
 
-  <button class="backdrop">Backdrop</button>
-  <button class="backdrop alt">Backdrop Alt</button>
+  <button class="backdrop">Chino</button>
+  <button class="backdrop alt">Discovery</button>
   <button class="kaos">Kaos</button>
 
   <div id="drop-target">
@@ -113,7 +122,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
   });
 
   var dropper = new window.Backdrop({
-    speed : 10
+    speed : 5,
+    debug: true
   });
 
   dropper.on('end', function(url) { window.console.log('dropped', url); });
@@ -121,14 +131,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   document.querySelector('button.backdrop').addEventListener('click', function(e) {
     if (! dropper.isDropping()) {
-      dropper.drop('assets/backdrop.jpg');
+      dropper.drop('https://dfm.photography/assets/img/photos/web.desktop/chino.jpg');
     }
   });
 
   document.querySelector('button.backdrop.alt').addEventListener('click', function(e) {
     if (! dropper.isDropping()) {
       dropper.drop({
-        'srcset' : 'assets/kaos.jpg',
+        'srcset' : 'https://dfm.photography/assets/img/photos/web.desktop/discovery.jpg',
         'node': document.body
       });
     }
