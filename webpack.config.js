@@ -14,7 +14,7 @@ const config = {
     path: path.resolve(__dirname, 'docs/build/'),
     filename: 'backdrop.bundle.js'
   },
-
+  mode: 'production',
   plugins : [
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false }
