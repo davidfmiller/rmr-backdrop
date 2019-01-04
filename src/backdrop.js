@@ -157,15 +157,14 @@
     img.onerror = function(src) {
       o.$._isDropping = false;
       o.$.events.error(src);
-    }
+    };
 
     img.onload = function() {
 
       if ('naturalHeight' in this && this.naturalHeight + this.naturalWidth === 0) {
         this.onerror();
         return;
-      }
-      else if (this.width + this.height == 0) {
+      } else if (this.width + this.height === 0) {
         this.onerror();
         return;
       }
