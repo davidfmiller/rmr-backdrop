@@ -198,7 +198,7 @@
         elapsed = now - startTime;
         t = (elapsed / duration );
 
-        val += change * t;
+        val += change * RMR.Timing.easeInOut(t);
         o.node.style.opacity = val;
 
         if (val >= 1) {
