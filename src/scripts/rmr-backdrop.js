@@ -218,7 +218,6 @@
               o.$._isDropping = false;
             }, 10
           );
-          console.log(now, startTime);
         } else {
           window.requestAnimationFrame(anim);
         }
