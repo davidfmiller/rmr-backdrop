@@ -12,21 +12,15 @@ const config = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'docs/build/'),
-    filename: 'backdrop.bundle.js'
+    filename: 'rmr-backdrop.bundle.js'
   },
   mode: 'production',
   plugins : [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    })
+//     new webpack.optimize.UglifyJsPlugin({
+//       compress: { warnings: false }
+//     })
   ],
   watch: true,
-
-  plugins : [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    })
-  ],
   module: {
     rules: [
       {

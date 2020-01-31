@@ -1,5 +1,5 @@
 
 (function() {
   'use strict';
-  window.Backdrop = require('./backdrop.js');
+  window.Backdrop = require('./scripts/rmr-backdrop.js');
 })();

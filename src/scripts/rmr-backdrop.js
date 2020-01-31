@@ -72,6 +72,7 @@
     const defaults = {
       speed: 5,
       node: document.body,
+      debug: false,
       id: guid('backdrop'),
       styles: {},
       events: {

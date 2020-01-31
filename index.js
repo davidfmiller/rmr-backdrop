@@ -1,5 +1,5 @@
 
 (function() {
   'use strict';
-  module.exports = require('./src/backdrop.js');
+  module.exports = require('./src/scripts/rmr-backdrop.js');
 })();
