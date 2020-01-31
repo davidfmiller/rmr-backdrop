@@ -70,7 +70,7 @@
     }
 
     const defaults = {
-      speed: 5,
+      duration: 1000,
       node: document.body,
       debug: false,
       id: guid('backdrop'),
@@ -85,7 +85,7 @@
     config.events = RMR.Object.merge(defaults.events, config.events);
     config = RMR.Object.merge(defaults, config);
 
-    this.speed = config.speed;
+    this.duration = config.duration;
     this.node = RMR.Node.get(config.node);
     this.id = config.id;
     this.styles = config.styles;
@@ -182,12 +182,23 @@
 
       _applyStyles(o.node, styles);
 
+      const duration = o.$.duration;
+
       let
       val = 0;
 
+      let start = 0,
+        change = 1,
+        startTime = performance.now(),
+        now, elapsed, t;
+
       const anim = function( ) {
 
-        val += o.$.speed / 100;
+        now = performance.now();
+        elapsed = now - startTime;
+        t = (elapsed / duration );
+
+        val += change * t;
         o.node.style.opacity = val;
 
         if (val >= 1) {
@@ -207,12 +218,13 @@
               o.$._isDropping = false;
             }, 10
           );
+          console.log(now, startTime);
         } else {
           window.requestAnimationFrame(anim);
         }
       };
 
-      window.requestAnimationFrame(anim);
+      anim();
 
       if (! RESIZE_LISTENED) {
         window.addEventListener('resize', function resizeListener() {
