@@ -4,10 +4,6 @@ const
   path = require('path'),
   webpack = require('webpack');
 
-//const ExtractTextPlugin = require('extract-text-webpack-plugin');
-//const extractCSS = new ExtractTextPlugin('[name].bundle.css');
-
-
 const config = {
   entry: './src/index.js',
   output: {
@@ -16,9 +12,6 @@ const config = {
   },
   mode: 'production',
   plugins : [
-//     new webpack.optimize.UglifyJsPlugin({
-//       compress: { warnings: false }
-//     })
   ],
   watch: true,
   module: {
