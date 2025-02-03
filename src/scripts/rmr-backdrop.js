@@ -1,5 +1,5 @@
 
-(function _() {
+(() => {
   'use strict';
 
   let

@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   document.querySelector('button.backdrop').addEventListener('click', function(e) {
     if (! dropper.isDropping()) {
       dropper.drop({
-        srcset: 'https://dfm.photography/assets/img/photos/web.desktop/chino.jpg',
+        srcset: 'https://s3.amazonaws.com/dfm.photography/photos/web.desktop/chino.jpg',
         styles: { 'position' : '50% bottom', 'color' : '#fff', 'size' : 'cover', 'position' : '0 0', 'attachment' : 'scroll' }
 
       });
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   document.querySelector('button.backdrop.alt').addEventListener('click', function(e) {
     if (! dropper.isDropping()) {
       dropper.drop({
-        srcset: 'https://dfm.photography/assets/img/photos/web.desktop/discovery.jpg',
+        srcset: 'https://s3.amazonaws.com/dfm.photography/photos/web.desktop/discovery.jpg',
         node: document.body,
         styles: { 'position' : '50% top', 'color' : '#000', 'size' : 'cover', 'position' : '0 0', 'attachment' : 'scroll' }
       });
