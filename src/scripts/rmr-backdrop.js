@@ -91,6 +91,11 @@
     this.styles = config.styles;
     this.events = config.events;
 
+    // extremely short durations don't behave well
+    if (this.duration < 200) {
+      this.duration = 200;
+    }
+
     this._isDropping = false;
   };
 

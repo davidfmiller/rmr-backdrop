@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   });
 
   var dropper = new window.Backdrop({
-    duration : 2000,
+    duration : 0.5,
     debug: true
   });
 
@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   document.querySelector('button.backdrop').addEventListener('click', function(e) {
     if (! dropper.isDropping()) {
       dropper.drop({
+        duration: 0.5,
         srcset: 'https://s3.amazonaws.com/dfm.photography/photos/web.desktop/chino.jpg',
         styles: { 'position' : '50% bottom', 'color' : '#fff', 'size' : 'cover', 'position' : '0 0', 'attachment' : 'scroll' }
 
@@ -172,9 +173,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     } else { console.log('nope'); }
   });
-
-
-
 });
 
 </script>
